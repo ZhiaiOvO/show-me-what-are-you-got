@@ -36,7 +36,7 @@ public class DrawContextMixin {
             ItemStack stack = showItem.item();
             if(stack.contains(DataComponentTypes.CUSTOM_DATA)) {
                 NbtComponent customDataNbt = stack.get(DataComponentTypes.CUSTOM_DATA);
-                if(!customDataNbt.isEmpty() && customDataNbt.getNbt().getBoolean(ShowMeWhatYouGot.HIDE_STACK_NBT, false)) {
+                if(!customDataNbt.isEmpty() && customDataNbt.copyNbt().getBoolean(ShowMeWhatYouGot.HIDE_STACK_NBT, false)) {
                     return;
                 }
             }
@@ -44,8 +44,9 @@ public class DrawContextMixin {
         }
     }
 
-    @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V", at = @At("HEAD"))
-    private void smwyg$modifyFirstTooltipComponent(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, Identifier texture, CallbackInfo ci) {
+//    @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V", at = @At("HEAD"))
+    @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;Z)V", at = @At("HEAD"))
+    private void smwyg$modifyFirstTooltipComponent(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, Identifier texture, boolean bl, CallbackInfo ci) {
         if(smwyg$hoveredStack == null || smwyg$hoveredStack.isEmpty() || components.size() == 0) {
             return;
         }
