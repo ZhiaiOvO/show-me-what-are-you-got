@@ -33,15 +33,15 @@ public class ShowMeWhatYouGotClient implements ClientModInitializer {
             if(client.player != null && client.currentScreen instanceof HandledScreen) {
                 HandledScreenFocusedSlotAccessor focusedSlotAccessor = (HandledScreenFocusedSlotAccessor)client.currentScreen;
                 Slot focusedSlot = focusedSlotAccessor.getFocusedSlot();
-                boolean isCtrlPressed = InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), GLFW.GLFW_KEY_LEFT_CONTROL);
+                boolean isCtrlPressed = InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow(), GLFW.GLFW_KEY_LEFT_CONTROL);
                 InputUtil.Key key = KeyBindingHelper.getBoundKeyOf(client.options.chatKey);
-                boolean isChatPressed = InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), key.getCode());
+                boolean isChatPressed = InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow(), key.getCode());
                 if(isCtrlPressed && isChatPressed && !sharedStack) {
                     sharedStack = true;
                     if (client.player.currentScreenHandler.getCursorStack().isEmpty() && focusedSlot != null && focusedSlot.hasStack()) {
                         // Open chat with sharing item
                         sharingItem = focusedSlot.getStack();
-                        client.setScreen(new ChatScreen(focusedSlot.getStack().toHoverableText().getString()));
+                        client.setScreen(new ChatScreen(focusedSlot.getStack().toHoverableText().getString(), true));
                     }
                 }
                 if(sharedStack && (!isCtrlPressed || !isChatPressed)) {

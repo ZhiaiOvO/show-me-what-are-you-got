@@ -55,14 +55,14 @@ public class HorizontalLayoutTooltipComponent implements TooltipComponent {
         return (this.height - height) / 2;
     }
 
-    @Override
+    /*@Override
     public void drawText(TextRenderer textRenderer, int x, int y, Matrix4f matrix, VertexConsumerProvider.Immediate vertexConsumers) {
         int currentX = x;
         for(TooltipComponent tc : components) {
             tc.drawText(textRenderer, currentX, y + getComponentY(tc, textRenderer), matrix, vertexConsumers);
             currentX += tc.getWidth(textRenderer) + gap;
         }
-    }
+    }*/
 
     @Override
     public void drawItems(TextRenderer textRenderer, int x, int y, int width, int height, DrawContext context) {
