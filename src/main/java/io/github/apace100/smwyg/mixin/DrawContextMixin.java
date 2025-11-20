@@ -44,7 +44,6 @@ public class DrawContextMixin {
         }
     }
 
-//    @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;)V", at = @At("HEAD"))
     @Inject(method = "drawTooltip(Lnet/minecraft/client/font/TextRenderer;Ljava/util/List;IILnet/minecraft/client/gui/tooltip/TooltipPositioner;Lnet/minecraft/util/Identifier;Z)V", at = @At("HEAD"))
     private void smwyg$modifyFirstTooltipComponent(TextRenderer textRenderer, List<TooltipComponent> components, int x, int y, TooltipPositioner positioner, Identifier texture, boolean bl, CallbackInfo ci) {
         if(smwyg$hoveredStack == null || smwyg$hoveredStack.isEmpty() || components.size() == 0) {
